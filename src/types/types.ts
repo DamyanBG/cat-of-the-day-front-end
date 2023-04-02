@@ -1,4 +1,4 @@
-export type InputType = "text" | "password" | "number" | "email";
+export type InputType = "text" | "password" | "number" | "email" | "file";
 
 export interface Field {
   controlId: string;

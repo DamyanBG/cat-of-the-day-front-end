@@ -5,7 +5,7 @@ type Props = { children: React.ReactNode }
 interface User {
   name?: string;
   email?: string;
-  id?: number;
+  user_pk?: number;
   token?: string;
   // Add any other properties of the user object here.
 }
