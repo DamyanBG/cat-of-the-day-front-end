@@ -1,3 +1,5 @@
-const LOCAL_HOST = "http://127.0.0.1:5000"
+// const LOCAL_HOST = "http://127.0.0.1:5000"
 
-export const HOST_URL = LOCAL_HOST
+const AZURE_HOST = "https://cat-of-the-day-back-end.azurewebsites.net/"
+
+export const HOST_URL = AZURE_HOST
