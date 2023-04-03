@@ -9,7 +9,7 @@ type Loading = boolean
 
 const Vote: React.FC = () => {
     const [catInfo, setCatInfo] = useState<CatInfo>()
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState<Loading>(true)
 
     const fetchVote = () => {
         setLoading(true)
