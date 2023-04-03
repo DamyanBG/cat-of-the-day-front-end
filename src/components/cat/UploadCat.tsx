@@ -46,8 +46,14 @@ const UploadCat: React.FC = () => {
         "Authorization": `Bearer ${user.token}`
       },
     })
-      .then(resp => resp.json())
+      .then(resp => {
+        if (!resp.ok) {
+          throw new Error()
+        }
+        return resp.json()
+      })
       .then(json => console.log(json))
+      .catch(() => alert("Problem occured during uploading the photo!"))
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {

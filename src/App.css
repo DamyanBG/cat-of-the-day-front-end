@@ -41,3 +41,22 @@ main {
   min-height: 70vh;
   background-color: lightgray;
 }
+
+.voting-image-section {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80vw;
+}
+
+.voting-image-section img {
+  width: 100%;
+}
+
+.voting-buttons-section {
+  margin-top: 2vh;
+}
+
+.voting-buttons-section :nth-child(2) {
+  margin-left: 40px;
+  margin-right: 40px;
+}

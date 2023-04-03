@@ -6,11 +6,11 @@ import LoginVoter from './components/users/Login';
 import Register from './components/users/Register';
 import UploadCat from './components/cat/UploadCat';
 import Rules from './components/rules/Rules';
+import { UserProvider } from './components/context/UserContext';
+import Vote from './components/cat/Vote';
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
-import { UserProvider } from './components/context/UserContext';
-
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
               <Route path="/login" element={<LoginVoter />} />
               <Route path="/upload-cat" element={<UploadCat />} />
               <Route path="/rules" element={<Rules />} />
+              <Route path="/vote" element={<Vote />} />
             </Routes>
           </main>
           <Footer />

@@ -18,7 +18,7 @@ const Header: React.FC = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ps-4 me-auto">
-          <Nav.Link>Vote</Nav.Link>
+          <Nav.Link as={Link} to="/vote">Vote</Nav.Link>
           <Nav.Link as={Link} to="/upload-cat">
             Upload your cat
           </Nav.Link>
