@@ -5,16 +5,21 @@ interface CatInfo {
     photo_url: string;
 }
 
+type Loading = boolean
+
 const Vote: React.FC = () => {
     const [catInfo, setCatInfo] = useState<CatInfo>()
+    const [loading, setLoading] = useState(true)
 
     const fetchVote = () => {
+        setLoading(true)
         fetch(`${HOST_URL}/vote`)
             .then(resp => resp.json())
             .then(json => {
                 console.log(json)
                 setCatInfo(json)
             })
+            .finally(() => setLoading(false))
     }
 
     useEffect(fetchVote, [])
@@ -31,6 +36,15 @@ const Vote: React.FC = () => {
                 "Content-Type": "application/json"
             }
         })
+            .then(resp => {
+                if (!resp.ok) {
+                    throw new Error()
+                }
+            })
+            .then(() => {
+                fetchVote()
+            })
+            .catch(() => alert("Error during voting!"))
     }
 
     const handleOnLike = () => {
@@ -52,13 +66,13 @@ const Vote: React.FC = () => {
                 <img src={catInfo?.photo_url} alt="Cat" />
             </section>
             <section className="voting-buttons-section">
-                <button className="btn btn-primary" onClick={handleOnLike}>
+                <button className="btn btn-primary" onClick={handleOnLike} disabled={loading}>
                     Like
                 </button>
-                <button className="btn btn-secondary" onClick={handleOnPass}>
+                <button className="btn btn-secondary" onClick={handleOnPass} disabled={loading}>
                     Pass
                 </button>
-                <button className="btn btn-danger" onClick={handleOnDislike}>
+                <button className="btn btn-danger" onClick={handleOnDislike} disabled={loading}>
                     Dislike
                 </button>
             </section>
