@@ -4,6 +4,7 @@ import FormGroupRow from "../common/FormGroupRow";
 import { HOST_URL } from "../common/urls";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { CatExistsContext } from "../context/CatExistsContext";
 
 interface CatInfo {
     name: string;
@@ -33,6 +34,7 @@ const UploadCat: React.FC = () => {
   const [catInfo, setCatInfo] = useState<CatInfo>(initialCatInfoState);
 
   const { user } = useContext(UserContext)
+  const { setCatExists } = useContext(CatExistsContext)
   const navigate = useNavigate()
 
   const postCat = () => {
@@ -56,6 +58,7 @@ const UploadCat: React.FC = () => {
       })
       .then(json => {
         console.log(json)
+        setCatExists(true)
         localStorage.setItem("catExist", "true");
         navigate("/cat-review")
       })

@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import { CatExistsContext } from "../context/CatExistsContext";
 
 const Header: React.FC = () => {
   const { user } = useContext(UserContext);
+  const { catExists } = useContext(CatExistsContext)
 
   return (
     <Navbar bg="primary" variant="dark" expand="md">
@@ -19,10 +21,18 @@ const Header: React.FC = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ps-4 me-auto">
           <Nav.Link as={Link} to="/vote">Vote</Nav.Link>
-          <Nav.Link as={Link} to="/upload-cat">
-            Upload your cat
-          </Nav.Link>
-          <Nav.Link>Rules</Nav.Link>
+          {
+            catExists ? (
+              <Nav.Link as={Link} to="/cat-review">
+                Review your cat
+              </Nav.Link>
+            ) : (
+              <Nav.Link as={Link} to="/upload-cat">
+                Upload your cat
+              </Nav.Link>
+            )
+          }
+          <Nav.Link as={Link} to="/rules">Rules</Nav.Link>
         </Nav>
         <Nav className="ms-auto me-4">
           {user.token ? (
