@@ -10,7 +10,7 @@ const Footer = () => (
         </Col>
         <Col xs={12} md={4}>
           <h4>Contact Us</h4>
-          <p>Email: contact@example.com</p>
+          <p>Email: inspirationalcode@gmail.com</p>
           <p>Phone: 123-456-7890</p>
         </Col>
         <Col xs={12} md={4}>

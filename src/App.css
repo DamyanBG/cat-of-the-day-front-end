@@ -60,3 +60,9 @@ main {
   margin-left: 40px;
   margin-right: 40px;
 }
+
+.flex p {
+  display: inline;
+  margin: 8px;
+  font-size: 20px;
+}

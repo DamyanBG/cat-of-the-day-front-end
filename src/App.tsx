@@ -8,9 +8,11 @@ import UploadCat from './components/cat/UploadCat';
 import Rules from './components/rules/Rules';
 import { UserProvider } from './components/context/UserContext';
 import Vote from './components/cat/Vote';
+import CatReview from './components/cat/CatReview';
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
+
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
               <Route path="/upload-cat" element={<UploadCat />} />
               <Route path="/rules" element={<Rules />} />
               <Route path="/vote" element={<Vote />} />
+              <Route path="/cat-review" element={<CatReview />} />
             </Routes>
           </main>
           <Footer />

@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import FormGroupRow from "../common/FormGroupRow";
 import { HOST_URL } from "../common/urls";
 import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 interface CatInfo {
     name: string;
@@ -32,6 +33,7 @@ const UploadCat: React.FC = () => {
   const [catInfo, setCatInfo] = useState<CatInfo>(initialCatInfoState);
 
   const { user } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const postCat = () => {
     const catPostData: CatPostData = {
@@ -52,7 +54,11 @@ const UploadCat: React.FC = () => {
         }
         return resp.json()
       })
-      .then(json => console.log(json))
+      .then(json => {
+        console.log(json)
+        localStorage.setItem("catExist", "true");
+        navigate("/cat-review")
+      })
       .catch(() => alert("Problem occured during uploading the photo!"))
   };
 
