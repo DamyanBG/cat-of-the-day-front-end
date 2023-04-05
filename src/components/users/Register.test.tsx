@@ -74,11 +74,11 @@ it(`Post request positive test`, async () => {
         email: 'stefan_p@abv.bg',
         phone_number: '43545345',
     };
-    jest.spyOn(global, 'fetch').mockImplementation(() =>
-        Promise.resolve({
-            json: () => Promise.resolve(fakeUser),
-        })
-    );
+    // jest.spyOn(global, 'fetch').mockImplementation(() =>
+    //     Promise.resolve({
+    //         json: () => Promise.resolve(fakeUser),
+    //     })
+    // );
     const firstNameInput: HTMLInputElement = container?.querySelector("[data-testid='first_name']")!;
     fireEvent.change(firstNameInput, { target: { value: 'Stefan' } });
 
