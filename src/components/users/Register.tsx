@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { HOST_URL } from "../common/urls";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -83,8 +83,11 @@ const Register: React.FC = () => {
     postUser(values);
   };
 
+  console.log(document.querySelector("[data-testid='first_name']"))
+  console.log(document.querySelector("[data-testid='q-da-vidim']"))
+
   return (
-    <div className="text-center">
+    <div className="text-center" data-testid="q-da-vidim">
       <Form
         onSubmit={handleOnSubmit}
         initialValues={initialRegisterState}
@@ -94,6 +97,7 @@ const Register: React.FC = () => {
             <label>First Name</label>
             <article>
               <Field
+                data-testid="first_name"
                 name="first_name"
                 component="input"
                 type="text"
@@ -106,6 +110,7 @@ const Register: React.FC = () => {
             <label>Last Name</label>
             <article>
               <Field
+                data-testid="last_name"
                 name="last_name"
                 component="input"
                 type="text"
@@ -118,6 +123,7 @@ const Register: React.FC = () => {
             <label>Email</label>
             <article>
               <Field
+                data-testid="email"
                 name="email"
                 component="input"
                 type="email"
@@ -130,6 +136,7 @@ const Register: React.FC = () => {
             <label>Password</label>
             <article>
               <Field
+                data-testid="password"
                 name="password"
                 component="input"
                 type="password"
@@ -148,7 +155,7 @@ const Register: React.FC = () => {
               />
             </article>
 
-            <button type="submit" disabled={submitting}>Submit</button>
+            <button type="submit" disabled={submitting} data-testid="submit-button">Submit</button>
 
           </form>
         )}
