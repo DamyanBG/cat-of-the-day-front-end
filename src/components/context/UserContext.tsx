@@ -30,6 +30,7 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
   const [user, setUser] = useState<User>({});
 
   useEffect(() => {
+    console.log("triger UserProvider")
     const localStorageUser = localStorage.getItem("user");
 
     if (localStorageUser) {
