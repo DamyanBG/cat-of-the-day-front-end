@@ -13,6 +13,7 @@ type Loading = boolean
 const Vote: React.FC = () => {
     const [catInfo, setCatInfo] = useState<CatInfo>()
     const [loading, setLoading] = useState<Loading>(true)
+    const [areCatsFinished, setAreCatsFinished] = useState<boolean>(false)
 
     const { user } = useContext(UserContext)
 
@@ -26,6 +27,7 @@ const Vote: React.FC = () => {
             .then(json => {
                 console.log(json)
                 setCatInfo(json)
+                if (!json.pk) setAreCatsFinished(true)
             })
             .finally(() => setLoading(false))
     }
@@ -44,7 +46,8 @@ const Vote: React.FC = () => {
             method: "POST",
             body: JSON.stringify(voteBody),
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${user.token}`
             }
         })
             .then(resp => {
@@ -76,20 +79,28 @@ const Vote: React.FC = () => {
                 isLoading={loading}
             >
                 <h1>Vote</h1>
-                <section className="voting-image-section">
-                    <img src={catInfo?.photo_url} alt="Cat" />
-                </section>
-                <section className="voting-buttons-section">
-                    <button className="btn btn-primary" onClick={handleOnLike} disabled={loading}>
-                        Like
-                    </button>
-                    <button className="btn btn-secondary" onClick={handleOnPass} disabled={loading}>
-                        Pass
-                    </button>
-                    <button className="btn btn-danger" onClick={handleOnDislike} disabled={loading}>
-                        Dislike
-                    </button>
-                </section>
+                {
+                    areCatsFinished ? (
+                        <h4>No cat for vote! Check later or become participant!</h4>
+                    ) : (
+                        <>
+                            <section className="voting-image-section">
+                                <img src={catInfo?.photo_url} alt="Cat" />
+                            </section>
+                            <section className="voting-buttons-section">
+                                <button className="btn btn-primary" onClick={handleOnLike} disabled={loading}>
+                                    Like
+                                </button>
+                                <button className="btn btn-secondary" onClick={handleOnPass} disabled={loading}>
+                                    Pass
+                                </button>
+                                <button className="btn btn-danger" onClick={handleOnDislike} disabled={loading}>
+                                    Dislike
+                                </button>
+                            </section>
+                        </>
+                    )
+                }
             </WithLoading>
         </div>
     )
