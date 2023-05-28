@@ -3,6 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { CatExistsContext } from "../context/CatExistsContext";
+import { logout } from "../users/logout";
 
 const Header: React.FC = () => {
   const { user } = useContext(UserContext);
@@ -12,10 +13,9 @@ const Header: React.FC = () => {
     <Navbar bg="primary" variant="dark" expand="md">
       <Navbar.Brand
         className="app-name text-uppercase ms-4 me-4"
-        href="/"
         style={{ fontFamily: "Montserrat", color: "#ccc" }}
       >
-        <span className="pe-4">Cat of the day</span>
+        <Nav.Link as={Link} to="/"><span className="pe-4">Cat of the day</span></Nav.Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -40,7 +40,7 @@ const Header: React.FC = () => {
               <Nav.Link as={Link} to="/profile">
                 Profile
               </Nav.Link>
-              <Nav.Link as={Link} to="/logout">
+              <Nav.Link onClick={logout}>
                 Logout
               </Nav.Link>
             </>
