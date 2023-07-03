@@ -10,6 +10,7 @@ import { UserProvider } from './components/context/UserContext';
 import Vote from './components/cat/Vote';
 import CatReview from './components/cat/CatReview';
 import { CatExistsProvider } from './components/context/CatExistsContext';
+import Profile from './components/users/Profile';
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<LoginVoter />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/upload-cat" element={<UploadCat />} />
                 <Route path="/rules" element={<Rules />} />
                 <Route path="/vote" element={<Vote />} />
