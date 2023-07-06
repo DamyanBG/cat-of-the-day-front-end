@@ -6,7 +6,6 @@ import { loadingWrap } from "../../utils/wrappers";
 
 interface CatInfo {
     photo_url: string;
-    cat_photo: string;
 }
 
 type Loading = boolean
@@ -62,7 +61,7 @@ const Vote: React.FC = () => {
             .catch(() => alert("Error during voting!"))
     }
 
-    const catPhoto = `data:image/png;base64,${catInfo?.cat_photo}`
+    const catPhotoUrl = catInfo?.photo_url
 
     const handleOnLike = () => {
         postVote("like")
@@ -88,7 +87,7 @@ const Vote: React.FC = () => {
                     ) : (
                         <>
                             <section className="voting-image-section">
-                                <img src={catPhoto} alt="Cat" />
+                                <img src={catPhotoUrl} alt="Cat" />
                             </section>
                             <section className="voting-buttons-section">
                                 <button className="btn btn-primary" onClick={handleOnLike} disabled={loading}>
