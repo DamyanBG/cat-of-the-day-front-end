@@ -5,6 +5,7 @@ import { HOST_URL } from "../common/urls";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { CatExistsContext } from "../context/CatExistsContext";
+import NonLoggedInMessage from "../common/NonLoggedInMessage";
 
 interface CatInfo {
     name: string;
@@ -26,18 +27,16 @@ const initialCatInfoState: CatInfo = {
     breed: ""
 }
 
-const NonLogedInMessage = () => (
-  <div>You have to be loged in to use this functionality!</div>
-)
-
 const UploadCat: React.FC = () => {
   const [catInfo, setCatInfo] = useState<CatInfo>(initialCatInfoState);
+  const [isUploading, setIsUploading] = useState<boolean>(false)
 
   const { user } = useContext(UserContext)
   const { setCatExists } = useContext(CatExistsContext)
   const navigate = useNavigate()
 
   const postCat = () => {
+    setIsUploading(true)
     const catPostData: CatPostData = {
       ...catInfo,
       uploader_pk: user.user_pk
@@ -63,6 +62,7 @@ const UploadCat: React.FC = () => {
         navigate("/cat-review")
       })
       .catch(() => alert("Problem occured during uploading the photo!"))
+      .finally(() => setIsUploading(false))
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -154,7 +154,7 @@ const UploadCat: React.FC = () => {
               />
             </Form.Group>
 
-            <Button className="w-100 mt-4" variant="dark" type="submit">
+            <Button disabled={isUploading} className="w-100 mt-4" variant="dark" type="submit">
               Add Cat
             </Button>
           </Form>
@@ -162,7 +162,7 @@ const UploadCat: React.FC = () => {
       </Row>
     </Container>
     ) : (
-      <NonLogedInMessage />
+      <NonLoggedInMessage />
     )
   );
 };

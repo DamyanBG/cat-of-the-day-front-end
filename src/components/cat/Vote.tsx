@@ -3,6 +3,7 @@ import { HOST_URL } from "../common/urls";
 import { UserContext } from "../context/UserContext";
 import WithLoading from "../hoc/WithLoading";
 import { loadingWrap } from "../../utils/wrappers";
+import WithNoLoggedIn from "../hoc/WithNoLoggedIn";
 
 interface CatInfo {
     photo_url: string;
@@ -77,33 +78,37 @@ const Vote: React.FC = () => {
 
     return (
         <div>
-            <WithLoading
-                isLoading={loading}
+            <WithNoLoggedIn
+                isLoggedIn={!!user?.token}
             >
-                <h1>Vote</h1>
-                {
-                    areCatsFinished ? (
-                        <h4>No cat for vote! Check later or become participant!</h4>
-                    ) : (
-                        <>
-                            <section className="voting-image-section">
-                                <img src={catPhotoUrl} alt="Cat" />
-                            </section>
-                            <section className="voting-buttons-section">
-                                <button className="btn btn-primary" onClick={handleOnLike} disabled={loading}>
-                                    Like
-                                </button>
-                                <button className="btn btn-secondary" onClick={handleOnPass} disabled={loading}>
-                                    Pass
-                                </button>
-                                <button className="btn btn-danger" onClick={handleOnDislike} disabled={loading}>
-                                    Dislike
-                                </button>
-                            </section>
-                        </>
-                    )
-                }
-            </WithLoading>
+                <WithLoading
+                    isLoading={loading}
+                >
+                    <h1>Vote</h1>
+                    {
+                        areCatsFinished ? (
+                            <h4>No cat for vote! Check later or become participant!</h4>
+                        ) : (
+                            <>
+                                <section className="voting-image-section">
+                                    <img src={catPhotoUrl} alt="Cat" />
+                                </section>
+                                <section className="voting-buttons-section">
+                                    <button className="btn btn-primary" onClick={handleOnLike} disabled={loading}>
+                                        Like
+                                    </button>
+                                    <button className="btn btn-secondary" onClick={handleOnPass} disabled={loading}>
+                                        Pass
+                                    </button>
+                                    <button className="btn btn-danger" onClick={handleOnDislike} disabled={loading}>
+                                        Dislike
+                                    </button>
+                                </section>
+                            </>
+                        )
+                    }
+                </WithLoading>
+            </WithNoLoggedIn>
         </div>
     )
 }
