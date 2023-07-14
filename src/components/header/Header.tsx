@@ -3,7 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { CatExistsContext } from "../context/CatExistsContext";
-import { logOut } from "../users/logout";
+import { LogOut } from "../users/LogOut";
 
 const Header: React.FC = () => {
   const { user } = useContext(UserContext);
@@ -40,9 +40,7 @@ const Header: React.FC = () => {
               <Nav.Link as={Link} to="/profile">
                 Profile
               </Nav.Link>
-              <Nav.Link onClick={logOut}>
-                Logout
-              </Nav.Link>
+              <LogOut />
             </>
           ) : (
             <>
