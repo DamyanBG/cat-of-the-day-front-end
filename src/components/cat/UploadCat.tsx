@@ -6,6 +6,7 @@ import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { CatExistsContext } from "../context/CatExistsContext";
 import NonLoggedInMessage from "../common/NonLoggedInMessage";
+import { checkObjForProfanity } from "../../utils/profanity";
 
 interface CatInfo {
     name: string;
@@ -87,6 +88,7 @@ const UploadCat: React.FC = () => {
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (checkObjForProfanity(catInfo)) return
     postCat();
   };
 
